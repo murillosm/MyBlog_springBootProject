@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,6 +25,11 @@ public class CodeblogController {
         List<Post> posts = codeblogService.findAll();
         mv.addObject("posts", posts);
         return mv;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getInicial(){
+        return "inicial";
     }
 
     @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
@@ -52,4 +55,11 @@ public class CodeblogController {
         codeblogService.save(post);
         return "redirect:/posts";
     }
+
+    /*@RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String deletePost(long id){
+        Post post = codeblogService.findById(id);
+        codeblogService.delete(post);
+        return "redirect:/posts";
+    }*/
 }

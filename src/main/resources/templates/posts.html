@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>MyCodeBlog</title>
+    <title>Improviso Blog</title>
 
     <!--Import google icon font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Improviso Blog</span>
                 <a href="/newpost" class="btn btn-primary" role="button">Novo Post</a>  <!--Crianção do butão "Novo Post"-->
             </div>
         </nav>
@@ -38,9 +38,7 @@
 
                     <a th:href="${(#mvc.url('CC#getPostDetails').arg(0, post.id)).build()}">
                         <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
-                                    <span th:text="${post.titulo}">
-
-                                    </span>
+                            <span th:text="${post.titulo}"></span>
                         </h4>
                     </a>
 
@@ -53,6 +51,7 @@
                         </a>-->
                     <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,400)}"></span></p>
 
+                    <a href="/posts" class="btn btn-primary" role="button">Delete</a>
                 </div>
             </div>
 

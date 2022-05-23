@@ -38,5 +38,6 @@ public class DummyData {
             Post postSaved = codeblogRepository.save(post);
             System.out.println(postSaved.getId());
         }
+
     }
 }
