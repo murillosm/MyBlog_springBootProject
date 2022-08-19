@@ -1,0 +1,64 @@
+<html>
+<body>
+<script type="vertex" id="vs">
+        #version 300 es
+
+
+    </script>
+
+<script type="fragment" id="fs">
+        #version 300 es
+
+    </script>
+
+
+<canvas id="webgl-canvas"></canvas>
+<script>
+    let canvas = document.getElementById("webgl-canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let gl = canvas.getContex("webglo2");
+    if (!gl){
+        console.error("Meu deus, vc tá com um pc antigo !!");
+    }
+    gl.clear(0,0,0,1);
+    let vsSource = document.getElementById("vs").text.trim();
+    let vertex = gl.createSheder(gl.VERTEX_SHADER);
+    gl.shaderSource(vertex, vsSource);
+    gl.compileShader(vertex);
+
+    if (!gl.getShaderParameter(vertex, gl.COMPILE_STATUS)){
+        console.error(gl.getShaderParameterInfoLog(vertex));
+    }
+        let fsSource = document.getElementById("fs").text.trim();
+        let fragment = gl.createSheder(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fragment, vsSource);
+        gl.compileShader(fragment);
+        if (!gl.getShaderParameter(fragment, gl.COMPILE_STATUS)){
+            console.error(gl.getShaderParameterInfoLog(fragment));
+        }
+        let program = gl.createProgram();
+        gl.attachShader(program, vertex);
+        gl.attachShader(program, fragment);
+        gl.linkProgram(program);
+        if( !gl.getProgramParameter(program, gl.LINK_STATUS)){
+            console.error(gl.getProgramInfolog(program));
+        }
+        gl.userProgram(program);
+        let triangle = gl.createVertexArray();
+        gl.findOrAddVertexArray(triangle);
+        let positions = new Float32Array([
+           -0.5,-0.5,0.0,
+           0.5,-0.5,0.0,
+           0.0,0.5,0.0
+        ]);
+
+        let positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+        gl.vertexAttribPointer(0,3,gl.FLOAT,false,0,0)
+</script>
+
+</body>
+
+</html>
